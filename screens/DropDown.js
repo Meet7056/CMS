@@ -217,14 +217,22 @@ export default function App() {
             }
             return item;
           });
+          if (updatedGender !== prevGender) {
+            try {
+              AsyncStorage.setItem('gender', JSON.stringify(updatedGender))
+                .then(() => {
+                  console.log('Gender data saved to AsyncStorage:', updatedGender);
+                })
+                .catch(error => {
+                  console.error('Error saving gender data to AsyncStorage:', error);
+                });
+            } catch (error) {
+              console.error('Error saving gender data to AsyncStorage:', error);
+            }
+          }
+        
           return updatedGender;
         });
-        try {
-          await AsyncStorage.setItem('gender', JSON.stringify(gender));
-          console.log('Gender data saved to AsyncStorage', gender);
-        } catch (error) {
-          console.error('Error saving gender data to AsyncStorage:', error);
-        }
         break;
       case 'Lunch In':
         setGender(prevGender => {
@@ -235,14 +243,22 @@ export default function App() {
             }
             return item;
           });
+          if (updatedGender !== prevGender) {
+            try {
+              AsyncStorage.setItem('gender', JSON.stringify(updatedGender))
+                .then(() => {
+                  console.log('Gender data saved to AsyncStorage:', updatedGender);
+                })
+                .catch(error => {
+                  console.error('Error saving gender data to AsyncStorage:', error);
+                });
+            } catch (error) {
+              console.error('Error saving gender data to AsyncStorage:', error);
+            }
+          }
+        
           return updatedGender;
         });
-        try {
-          await AsyncStorage.setItem('gender', JSON.stringify(gender));
-          console.log('Gender data saved to AsyncStorage', gender);
-        } catch (error) {
-          console.error('Error saving gender data to AsyncStorage:', error);
-        }
         break;
       case 'Lunch Out':
         setGender(prevGender => {
@@ -253,14 +269,22 @@ export default function App() {
             }
             return item;
           });
+          if (updatedGender !== prevGender) {
+            try {
+              AsyncStorage.setItem('gender', JSON.stringify(updatedGender))
+                .then(() => {
+                  console.log('Gender data saved to AsyncStorage:', updatedGender);
+                })
+                .catch(error => {
+                  console.error('Error saving gender data to AsyncStorage:', error);
+                });
+            } catch (error) {
+              console.error('Error saving gender data to AsyncStorage:', error);
+            }
+          }
+        
           return updatedGender;
         });
-        try {
-          await AsyncStorage.setItem('gender', JSON.stringify(gender));
-          console.log('Gender data saved to AsyncStorage', gender);
-        } catch (error) {
-          console.error('Error saving gender data to AsyncStorage:', error);
-        }
         break;
       case 'Personal In':
         setGender(prevGender => {
@@ -271,14 +295,22 @@ export default function App() {
             }
             return item;
           });
+          if (updatedGender !== prevGender) {
+            try {
+              AsyncStorage.setItem('gender', JSON.stringify(updatedGender))
+                .then(() => {
+                  console.log('Gender data saved to AsyncStorage:', updatedGender);
+                })
+                .catch(error => {
+                  console.error('Error saving gender data to AsyncStorage:', error);
+                });
+            } catch (error) {
+              console.error('Error saving gender data to AsyncStorage:', error);
+            }
+          }
+        
           return updatedGender;
         });
-        try {
-          await AsyncStorage.setItem('gender', JSON.stringify(gender));
-          console.log('Gender data saved to AsyncStorage', gender);
-        } catch (error) {
-          console.error('Error saving gender data to AsyncStorage:', error);
-        }
         break;
       case 'Personal Out':
         setGender(prevGender => {
@@ -289,14 +321,22 @@ export default function App() {
             }
             return item;
           });
+          if (updatedGender !== prevGender) {
+            try {
+              AsyncStorage.setItem('gender', JSON.stringify(updatedGender))
+                .then(() => {
+                  console.log('Gender data saved to AsyncStorage:', updatedGender);
+                })
+                .catch(error => {
+                  console.error('Error saving gender data to AsyncStorage:', error);
+                });
+            } catch (error) {
+              console.error('Error saving gender data to AsyncStorage:', error);
+            }
+          }
+        
           return updatedGender;
         });
-        try {
-          await AsyncStorage.setItem('gender', JSON.stringify(gender));
-          console.log('Gender data saved to AsyncStorage', gender);
-        } catch (error) {
-          console.error('Error saving gender data to AsyncStorage:', error);
-        }
         break;
     }
 

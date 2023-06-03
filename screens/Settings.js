@@ -31,6 +31,25 @@ export default function App({ navigation }) {
     const [tokentoApi, settokentoApi] = useState("");
     const [userid, setuserid] = useState("");
 
+    const getNotiToken = async () => {
+        try {
+            const value = await AsyncStorage.getItem('fcmtoken');
+            if (value !== null) {
+                settokentoApi(value);
+                console.log("token got!")
+            } else {
+                console.log('fcmtoken is null');
+                getNotiToken();
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        getNotiToken();
+    }, [])
+
     const handleLogin = async () => {
         setLoading(true);
         const response = await axios.post(
@@ -45,16 +64,11 @@ export default function App({ navigation }) {
         if (data.statusCode == 200) {
             await AsyncStorage.setItem('username', Memail);
 
-            setuserid(data._id);
-            console.log(data._id, "userid")
-
             Alert.alert('Login Success!', 'You are Logged in!', [
                 { text: 'OK' },
             ])
-            navigation.navigate('Main')
             // send token to api
             const url = `https://cms-sparrow.herokuapp.com/eng-apk-api/update_engineer_profile/${data._id}`;
-
             axios
                 .put(
                     url,
@@ -62,29 +76,22 @@ export default function App({ navigation }) {
                         "notification_token": tokentoApi
                     }
                 )
+                .then((response) => {
+                    if (response.data.statusCode == 200) {
+                        Alert.alert("Token Sent!")
+                        console.log("Token Sent!")
+                    } else {
+                        Alert.alert("error")
+                        console.log("error")
+                    }
+                })
                 .catch((error) => {
                     console.log(error);
                 });
-            // console.log(userid, tokentoApi, "send to api data")
-            console.log(url)
+            navigation.navigate('Main')
         } else {
             Alert.alert('login failed!')
         }
-
-        const getNotiToken = async () => {
-            try {
-                const value = await AsyncStorage.getItem('fcmtoken');
-                if (value !== null) {
-                    settokentoApi(value);
-                } else {
-                    console.log('username is null');
-                }
-            } catch (error) {
-                console.log(error);
-            }
-        };
-
-        getNotiToken();
     }
 
     // const handleSubmit = async () => {
