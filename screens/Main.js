@@ -1,5 +1,5 @@
 
-import React, { memo, useState } from 'react';
+import React, { memo, useState, useEffect } from 'react';
 import { View, Image, StyleSheet, TouchableOpacity, Text, Alert } from 'react-native';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
 import axios from 'axios';
@@ -17,42 +17,6 @@ import ProfileScreen from '../components/Profile';
 import AttendanceReport from '../components/AttendenceReport';
 
 const Main = ({navigation}) => {
-
-    const [datatoApi, setdatatoApi] = useState("");
-
-    // send token to api 
-
-    useEffect(() => {
-        const getUsername = async () => {
-          try {
-            const value = await AsyncStorage.getItem('username');
-            if (value !== null) {
-              setUsername(value);
-            } else {
-              console.log('username is null');
-            }
-          } catch (error) {
-            console.log(error);
-          }
-        };
-    
-        getUsername();
-    
-        axios
-          .post(
-            'http://cms-sparrow.herokuapp.com/eng-apk-api/engineer_review_compaint',
-            {
-                "notification_token": "abcd"
-            }
-          )
-          .then((response) => {
-            setData(response.data.data);
-            setLoading(false);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }, []);
 
     const CustomDrawerContent = (props) => {
         return (

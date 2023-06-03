@@ -28,10 +28,8 @@ export default function App({ navigation }) {
     const Memail = email.trim();
     const Mpassword = password.trim();
 
-    const dataToSend = {
-        name: Memail,
-        passWord: Mpassword,
-    };
+    const [tokentoApi, settokentoApi] = useState("");
+    const [userid, setuserid] = useState("");
 
     const handleLogin = async () => {
         setLoading(true);
@@ -45,16 +43,49 @@ export default function App({ navigation }) {
         const { data } = response;
         setLoading(false);
         if (data.statusCode == 200) {
-            await AsyncStorage.setItem('username', Memail); // Store the username in AsyncStorage
+            await AsyncStorage.setItem('username', Memail);
+
+            setuserid(data._id);
+            console.log(data._id, "userid")
 
             Alert.alert('Login Success!', 'You are Logged in!', [
                 { text: 'OK' },
             ])
             navigation.navigate('Main')
+            // send token to api
+            const url = `https://cms-sparrow.herokuapp.com/eng-apk-api/update_engineer_profile/${data._id}`;
+
+            axios
+                .put(
+                    url,
+                    {
+                        "notification_token": tokentoApi
+                    }
+                )
+                .catch((error) => {
+                    console.log(error);
+                });
+            // console.log(userid, tokentoApi, "send to api data")
+            console.log(url)
         } else {
             Alert.alert('login failed!')
         }
-    };
+
+        const getNotiToken = async () => {
+            try {
+                const value = await AsyncStorage.getItem('fcmtoken');
+                if (value !== null) {
+                    settokentoApi(value);
+                } else {
+                    console.log('username is null');
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        };
+
+        getNotiToken();
+    }
 
     // const handleSubmit = async () => {
     //     if (otp.length !== 6) {
